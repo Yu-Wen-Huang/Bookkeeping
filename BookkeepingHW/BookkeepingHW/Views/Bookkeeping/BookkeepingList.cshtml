@@ -1,0 +1,39 @@
+﻿@model IPagedList<BookkeepingHW.Models.ViewModels.ListViewModel>
+
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    Layout = null;
+    ViewBag.Title = "BookkeepingList";
+    var listId = 1;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>#</th>
+                <th>類別</th>
+                <th>日期</th>
+                <th>金額</th>
+                <th>備註</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@listId</td>
+                    <td>@item.Category</td>
+                    <td>@item.Date</td>
+                    <td>@item.Amount</td>
+                    <td>@item.Memo</td>
+                </tr>
+                listId++;
+            }
+            
+            
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("index", new { page }))
+    </div>
+</div>
+
