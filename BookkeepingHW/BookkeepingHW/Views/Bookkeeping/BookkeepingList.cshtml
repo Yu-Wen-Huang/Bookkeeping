@@ -17,7 +17,6 @@
                 <th>類別</th>
                 <th>日期</th>
                 <th>金額</th>
-                <th>備註</th>
             </tr>
             @foreach (var item in Model)
             {
@@ -26,7 +25,6 @@
                     <td>@item.Category</td>
                     <td>@item.Date</td>
                     <td>@item.Amount</td>
-                    <td>@item.Memo</td>
                 </tr>
                 listId++;
             }

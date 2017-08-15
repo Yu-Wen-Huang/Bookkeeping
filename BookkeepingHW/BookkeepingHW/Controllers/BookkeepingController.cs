@@ -15,6 +15,7 @@ namespace BookkeepingHW.Controllers
     {
         private int pageSize = 10;
         private List<ListViewModel> data = new List<ListViewModel>();
+        private SkillTreeHomeworkEntities db = new SkillTreeHomeworkEntities();
 
         private int pageNum = 1;
 
@@ -27,13 +28,24 @@ namespace BookkeepingHW.Controllers
         
         public ActionResult BookkeepingList(int? page)
         {
-            data.Add(new ListViewModel
+            var accountList = db.AccountBook.Select(x => new ListViewModel
             {
-                Category = "收入",
-                Date = DateTime.Today,
-                Amount = 100,
-                Memo = "eat"
+                Category = x.Categoryyy.ToString(),
+                Date = x.Dateee,
+                Amount = x.Amounttt,
+                Memo = x.Remarkkk
             });
+            data = accountList.OrderBy(d => d.Date).ToList();
+            //var accountList = db.AccountBook.OrderBy(d => d.Dateee).ToList();
+            //foreach (var item in accountList)
+            //{
+            //    ListViewModel obj = new ListViewModel();
+            //    obj.Category = item.Categoryyy.ToString();
+            //    obj.Date = item.Dateee;
+            //    obj.Amount = item.Amounttt;
+            //    obj.Memo = item.Remarkkk;
+            //    data.Add(obj);
+            //}
 
             pageNum = page ?? 1;
 
